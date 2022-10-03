@@ -1,8 +1,16 @@
-<h3>Clickable</h3>
-<p-steps
-  [model]="items"
-  [(activeIndex)]="activeIndex"
-  [readonly]="false"
-  (activeIndexChange)="changeStep($event)"
-></p-steps>
-<router-outlet></router-outlet>
+<div class="container pt-4 max-width-xxl">
+  <p-steps
+    [model]="items"
+    [(activeIndex)]="activeIndex"
+    [readonly]="false"
+    (activeIndexChange)="changeStep($event)"
+  ></p-steps>
+
+  <ng-container [ngSwitch]="activeIndex">
+    <app-upload-image
+      *ngSwitchCase="stepsComponentEnum.UploadFile"
+    ></app-upload-image>
+  </ng-container>
+
+  <router-outlet></router-outlet>
+</div>

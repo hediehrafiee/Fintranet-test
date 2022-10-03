@@ -5,9 +5,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { UploadImageComponent } from './upload-image/upload-image.component';
+
 import { StepsModule } from 'primeng/steps';
 import { ToastModule } from 'primeng/toast';
-import { UploadImageComponent } from './upload-image/upload-image.component';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [AppComponent, UploadImageComponent],
@@ -17,6 +20,8 @@ import { UploadImageComponent } from './upload-image/upload-image.component';
     BrowserAnimationsModule,
     StepsModule,
     ToastModule,
+    CardModule,
+    ButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
