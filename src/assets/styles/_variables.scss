@@ -1,0 +1,36 @@
+$lightGray: #eaeaea;
+
+$height-width: (
+  xsm: 100px,
+  sm: 300px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1600px,
+  full: 100%,
+);
+
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge(
+  (
+    0: 0,
+    1: (
+      $spacer * 0.25,
+    ),
+    2: (
+      $spacer * 0.5,
+    ),
+    3: $spacer,
+    4: (
+      $spacer * 1.5,
+    ),
+    5: (
+      $spacer * 3,
+    ),
+  ),
+  $spacers
+);
+
+$displays: none, inline, inline-block, block, table, table-row, table-cell, flex,
+  inline-flex !default;

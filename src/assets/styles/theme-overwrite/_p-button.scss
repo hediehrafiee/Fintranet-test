@@ -1,0 +1,13 @@
+p-button {
+  &.width-full {
+    button.p-button {
+      width: 100%;
+    }
+  }
+
+  &.cursor-pointer {
+    button.p-button {
+      cursor: pointer;
+    }
+  }
+}
