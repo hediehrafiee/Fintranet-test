@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 
 import { map, catchError, of } from 'rxjs';
-import { UploadFilesService } from '../services/upload-files.service';
+import { UploadFilesService } from './../../services/upload-files.service';
 
 @Component({
   selector: 'app-upload-image',
@@ -21,7 +21,7 @@ export class UploadImageComponent {
   public progress: number = 0;
 
   public imgSrc: string = '';
-  public file: File;
+  public file: File | null;
   private kiloByte: number = 1024;
   private maxImageSize: number = 5 * this.kiloByte * this.kiloByte;
 
@@ -40,6 +40,7 @@ export class UploadImageComponent {
 
         detail: 'Max image size is 5MB',
       });
+      this.file = null;
       return;
     }
 
@@ -52,7 +53,7 @@ export class UploadImageComponent {
 
   public uploadImage(): void {
     let formData: FormData = new FormData();
-    formData.append('file', this.file, this.file.name);
+    formData.append('file', this.file as File, (this.file as File).name);
 
     this.inProgress = true;
     this.progress = 0;

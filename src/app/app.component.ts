@@ -14,7 +14,7 @@ export class AppComponent {
 
   public items: any;
 
-  public activeIndex: number = 0;
+  public activeIndex: number = 1;
   public stepsComponentEnum: typeof StepsComponentEnum = StepsComponentEnum;
 
   constructor(private messageService: MessageService) {}
@@ -25,7 +25,7 @@ export class AppComponent {
         label: 'Upload Image',
       },
       {
-        label: 'Seat',
+        label: 'Form',
       },
       {
         label: 'Payment',
@@ -37,7 +37,6 @@ export class AppComponent {
   }
 
   public changeStep(index: number): void {
-    console.log(index);
     this.activeIndex = index;
   }
 }

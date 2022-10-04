@@ -1,4 +1,4 @@
-<p-toast></p-toast>
+<p-toast position="bottom-center"></p-toast>
 
 <div class="container pt-4 max-width-xxl">
   <p-steps
@@ -8,11 +8,16 @@
     (activeIndexChange)="changeStep($event)"
   ></p-steps>
 
-  <ng-container [ngSwitch]="activeIndex">
-    <app-upload-image
-      *ngSwitchCase="stepsComponentEnum.UploadFile"
-    ></app-upload-image>
-  </ng-container>
+  <div
+    class="upload-image-container d-flex justify-content-center align-items-center height-md"
+  >
+    <ng-container [ngSwitch]="activeIndex">
+      <app-upload-image
+        *ngSwitchCase="stepsComponentEnum.UploadFile"
+      ></app-upload-image>
+      <app-form *ngSwitchCase="stepsComponentEnum.Form"></app-form>
+    </ng-container>
 
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
+  </div>
 </div>

@@ -1,0 +1,60 @@
+<div class="card width-md p-4">
+  <h1 class="m-0">Insert you information</h1>
+  <p-divider></p-divider>
+  <div class="d-flex mb-3">
+    <div class="f-1 pr-2">
+      <label class="mt-0 mb-2 d-inline-block">Name:</label>
+      <input class="width-full" type="text" pInputText />
+    </div>
+    <div class="f-1 pl-2">
+      <label class="mt-0 mb-2 d-inline-block">Experience:</label>
+      <input
+        id="username2"
+        type="username"
+        aria-describedby="username2-help"
+        class="ng-invalid ng-dirty width-full"
+        pInputText
+      />
+      <!-- <small id="username2-help" class="p-error block"
+        >Username is not available.</small
+      > -->
+    </div>
+  </div>
+
+  <div class="d-flex mb-3">
+    <div class="f-1 pr-2">
+      <label class="mt-0 mb-2 d-inline-block">RelationSheep:</label>
+      <p-dropdown
+        [options]="cities"
+        [(ngModel)]="selectedCity1"
+        placeholder="Select a City"
+        optionLabel="name"
+        [showClear]="true"
+        class="width-full"
+      ></p-dropdown>
+    </div>
+    <div class="f-1 pl-2">
+      <label class="mt-0 mb-2 d-inline-block">Birthday:</label>
+      <p-calendar
+        [(ngModel)]="date2"
+        dateFormat="mm-dd-yy"
+        inputId="dateformat"
+        class="width-full"
+      ></p-calendar>
+    </div>
+  </div>
+
+  <button
+    pButton
+    class="width-full cursor-pointer"
+    styleClass="p-button-lg"
+    label="submit"
+  ></button>
+
+  <!-- <input
+  type="date"
+  #myDate
+  [value]="demoUser.date | date: 'yyyy-MM-dd'"
+  (input)="demoUser.date = parseDate($event)"
+/> -->
+</div>
