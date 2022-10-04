@@ -13,11 +13,18 @@
     max-width: $gapValue;
   }
 
+  .min-width-#{$gapName} {
+    min-width: $gapValue;
+  }
+
   .height-#{$gapName} {
     height: $gapValue;
   }
   .max-height-#{$gapName} {
     max-height: $gapValue;
+  }
+  .min-height-#{$gapName} {
+    min-height: $gapValue;
   }
 }
 
@@ -91,4 +98,12 @@
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.f-1 {
+  flex: 1;
 }
