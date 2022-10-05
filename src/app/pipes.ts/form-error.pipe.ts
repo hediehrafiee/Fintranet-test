@@ -6,23 +6,23 @@ import { ValidationErrors } from '@angular/forms';
 })
 export class FormErrorPipe implements PipeTransform {
   public transform(
-    errors: ValidationErrors,
-    errorType?: 'number' | 'letters' | 'next-five-day'
+    errors: ValidationErrors | null,
+    errorType?: 'letter' | 'next-five-day'
   ): string {
-    const keys: string[] = Object.keys(errors);
+    const keys: string[] = Object.keys(errors as ValidationErrors);
     if (keys.length === 0) return '';
 
     const key: string = keys[0];
-    const value: any = errors[key];
+    const value: any = (errors as ValidationErrors)[key];
 
+    console.log(key, value);
     switch (key) {
       case 'required':
-        switch (errorType) {
-          case 'number':
-            return '';
-        }
-        return '';
-
+        return 'This field is required';
+      case 'letter':
+        return 'This field can only contain letters';
+      case 'dateRange':
+        return 'Only the next five days can be selected';
       default:
         return '';
     }

@@ -1,60 +1,90 @@
 <div class="card width-md p-4">
-  <h1 class="m-0">Insert you information</h1>
-  <p-divider></p-divider>
-  <div class="d-flex mb-3">
-    <div class="f-1 pr-2">
-      <label class="mt-0 mb-2 d-inline-block">Name:</label>
-      <input class="width-full" type="text" pInputText />
+  <form [formGroup]="addInformationForm" (submit)="addInformation()">
+    <h1 class="m-0">Insert you information</h1>
+    <p-divider></p-divider>
+    <div class="d-flex mb-3">
+      <div class="f-1 pr-2">
+        <label for="name" class="mt-0 mb-2 d-inline-block">Name:</label>
+        <input
+          id="name"
+          class="width-full"
+          type="text"
+          formControlName="name"
+          pInputText
+        />
+        <small
+          *ngIf="controlName.invalid && controlName.dirty"
+          class="p-error block"
+          >{{ controlName.errors | formError: "letter" }}</small
+        >
+      </div>
+      <div class="f-1 pl-2">
+        <!-- ng-invalid ng-dirty  -->
+        <label for="height" class="mt-0 mb-2 d-inline-block">Height:</label>
+        <input
+          type="number"
+          id="height"
+          formControlName="height"
+          class="width-full"
+          pInputText
+        />
+        <small
+          *ngIf="controlHeight.invalid && controlHeight.dirty"
+          class="p-error block"
+          >{{ controlHeight.errors | formError }}</small
+        >
+      </div>
     </div>
-    <div class="f-1 pl-2">
-      <label class="mt-0 mb-2 d-inline-block">Experience:</label>
-      <input
-        id="username2"
-        type="username"
-        aria-describedby="username2-help"
-        class="ng-invalid ng-dirty width-full"
-        pInputText
-      />
-      <!-- <small id="username2-help" class="p-error block"
-        >Username is not available.</small
-      > -->
-    </div>
-  </div>
 
-  <div class="d-flex mb-3">
-    <div class="f-1 pr-2">
-      <label class="mt-0 mb-2 d-inline-block">RelationSheep:</label>
-      <p-dropdown
-        [options]="cities"
-        [(ngModel)]="selectedCity1"
-        placeholder="Select a City"
-        optionLabel="name"
-        [showClear]="true"
-        class="width-full"
-      ></p-dropdown>
-    </div>
-    <div class="f-1 pl-2">
-      <label class="mt-0 mb-2 d-inline-block">Birthday:</label>
-      <p-calendar
-        [(ngModel)]="date2"
-        dateFormat="mm-dd-yy"
-        inputId="dateformat"
-        class="width-full"
-      ></p-calendar>
-    </div>
-  </div>
+    <div class="d-flex mb-3">
+      <div class="f-1 pr-2">
+        <label class="mt-0 mb-2 d-inline-block" for="relationShipStatus"
+          >RelationShip Status:</label
+        >
+        <p-dropdown
+          id="relationShipStatus"
+          [options]="relationshipStatus"
+          formControlName="relationShipStatus"
+          class="width-full"
+          placeholder="Select a status"
+          optionLabel="status"
+          [showClear]="true"
+        ></p-dropdown>
 
-  <button
-    pButton
-    class="width-full cursor-pointer"
-    styleClass="p-button-lg"
-    label="submit"
-  ></button>
+        <small
+          *ngIf="
+            controlRelationShipStatus.invalid && controlRelationShipStatus.dirty
+          "
+          class="p-error block"
+          >{{ controlRelationShipStatus.errors | formError }}</small
+        >
+      </div>
+      <div class="f-1 pl-2">
+        <label class="mt-0 mb-2 d-inline-block">Available Day:</label>
+        <!-- PrimeNG min and max can also be used instead of validators 
+          [minDate]="minDateValue"
+          [maxDate]="maxDateValue" -->
+        <p-calendar
+          formControlName="availableDay"
+          dateFormat="mm-dd-yy"
+          inputId="dateformat"
+          class="width-full"
+        ></p-calendar>
+        <small
+          *ngIf="controlAvailableDay.invalid && controlAvailableDay.dirty"
+          class="p-error block"
+          >{{ controlAvailableDay.errors | formError }}</small
+        >
+      </div>
+    </div>
 
-  <!-- <input
-  type="date"
-  #myDate
-  [value]="demoUser.date | date: 'yyyy-MM-dd'"
-  (input)="demoUser.date = parseDate($event)"
-/> -->
+    <button
+      pButton
+      class="width-full cursor-pointer"
+      styleClass="p-button-lg"
+      label="submit"
+      type="submit"
+      [disabled]="addInformationForm.invalid"
+    ></button>
+  </form>
 </div>

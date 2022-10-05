@@ -5,7 +5,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { DateRangeValidator } from '../../validators/date.validator';
 import { LettersValidator } from '../../validators/letters.validator';
 
 @Component({
@@ -42,23 +41,19 @@ export class FormComponent implements OnInit {
     return this.addInformationForm.get('relationShipStatus') as AbstractControl;
   }
 
-  get controlAvailableDay(): AbstractControl {
-    return this.addInformationForm.get('availableDay') as AbstractControl;
-  }
-
+  private today: Date = new Date();
   public minDateValue: Date = new Date();
-  public maxDateValue: Date = new Date();
+  public maxDateValue: Date;
 
   ngOnInit(): void {
-    this.maxDateValue.setDate(this.minDateValue.getDate() + 5);
-
-    this.controlAvailableDay.setValidators([
-      DateRangeValidator(this.minDateValue, this.maxDateValue),
-      Validators.required,
-    ]);
+    this.minDateValue.setDate(this.today.getDate() + 1);
+    this.maxDateValue.setDate(this.today.getDate() + 2);
   }
 
-  public addInformation(): void {
-    console.log(this.addInformationForm.value);
+  parseDate(dateString: any): Date | null {
+    if (dateString.target.value) {
+      return new Date(dateString.target);
+    }
+    return null;
   }
 }
