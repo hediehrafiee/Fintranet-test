@@ -7,8 +7,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { FormComponent } from './componnets/form/form.component';
-import { UploadImageComponent } from './componnets/upload-image/upload-image.component';
+import { FormComponent } from './components/form/form.component';
+import { UploadImageComponent } from './components/upload-image/upload-image.component';
+import { TableOfPeopleComponent } from './components/table-of-people/table-of-people.component';
 
 import { StepsModule } from 'primeng/steps';
 import { ToastModule } from 'primeng/toast';
@@ -21,6 +22,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
 import { DividerModule } from 'primeng/divider';
 import { FormErrorPipe } from './pipes.ts/form-error.pipe';
+import { TableModule } from 'primeng/table';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { FormErrorPipe } from './pipes.ts/form-error.pipe';
     UploadImageComponent,
     FormComponent,
     FormErrorPipe,
+    TableOfPeopleComponent,
   ],
   imports: [
     HttpClientModule,
@@ -47,6 +51,8 @@ import { FormErrorPipe } from './pipes.ts/form-error.pipe';
     DropdownModule,
     CalendarModule,
     DividerModule,
+    TableModule,
+    CheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

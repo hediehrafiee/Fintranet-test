@@ -1,7 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
+
 import { StepsComponentEnum } from './enums/steps-component.enum';
+import { TeacherRs } from './interfaces/teachers.interface';
 
 @Component({
   selector: 'app-root',
@@ -14,10 +15,10 @@ export class AppComponent {
 
   public items: any;
 
-  public activeIndex: number = 1;
+  public activeIndex: number = 2;
   public stepsComponentEnum: typeof StepsComponentEnum = StepsComponentEnum;
 
-  constructor(private messageService: MessageService) {}
+  constructor() {}
 
   ngOnInit() {
     this.items = [
@@ -38,5 +39,9 @@ export class AppComponent {
 
   public changeStep(index: number): void {
     this.activeIndex = index;
+  }
+
+  public onChooseTeacher(teachers: TeacherRs[]): void {
+    this.activeIndex = this.activeIndex + 1;
   }
 }

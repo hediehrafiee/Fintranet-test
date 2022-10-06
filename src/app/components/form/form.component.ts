@@ -5,6 +5,9 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+
+import { MessageService } from 'primeng/api';
+
 import { DateRangeValidator } from '../../validators/date.validator';
 import { LettersValidator } from '../../validators/letters.validator';
 
@@ -21,7 +24,10 @@ export class FormComponent implements OnInit {
     { status: 'Discoverd' },
   ];
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private readonly messageService: MessageService
+  ) {}
 
   public addInformationForm: FormGroup = this.formBuilder.group({
     name: ['', [LettersValidator]],
@@ -60,5 +66,10 @@ export class FormComponent implements OnInit {
 
   public addInformation(): void {
     console.log(this.addInformationForm.value);
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: `Your information has been registered`,
+    });
   }
 }

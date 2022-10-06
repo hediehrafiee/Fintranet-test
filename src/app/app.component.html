@@ -16,6 +16,10 @@
         *ngSwitchCase="stepsComponentEnum.UploadFile"
       ></app-upload-image>
       <app-form *ngSwitchCase="stepsComponentEnum.Form"></app-form>
+      <app-table-of-people
+        *ngSwitchCase="stepsComponentEnum.TableOfPeople"
+        (onChooseTeacher)="onChooseTeacher($event)"
+      ></app-table-of-people>
     </ng-container>
 
     <router-outlet></router-outlet>

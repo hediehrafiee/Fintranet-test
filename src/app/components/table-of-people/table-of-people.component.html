@@ -1,0 +1,91 @@
+<div class="card">
+  <p-table
+    #dt
+    [value]="teachers"
+    dataKey="id"
+    [rowHover]="true"
+    [loading]="loading"
+    [metaKeySelection]="false"
+    dataKey="id"
+  >
+    <ng-template pTemplate="caption">
+      <h2 class="m-0">Select your teacher</h2>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem"></th>
+        <th pSortableColumn="name">
+          <div class="flex justify-content-between align-items-center">
+            Name
+            <p-sortIcon field="name"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="country.name">
+          <div class="flex justify-content-between align-items-center">
+            Country
+            <p-sortIcon field="country.name"></p-sortIcon>
+          </div>
+        </th>
+
+        <th pSortableColumn="date">
+          <div class="flex justify-content-between align-items-center">
+            Date
+            <p-sortIcon field="date"></p-sortIcon>
+          </div>
+        </th>
+
+        <th pSortableColumn="status">
+          <div class="flex justify-content-between align-items-center">
+            Status
+            <p-sortIcon field="status"></p-sortIcon>
+          </div>
+        </th>
+        <th pSortableColumn="activity">
+          <div class="flex justify-content-between align-items-center">
+            Activity
+            <p-sortIcon field="activity"></p-sortIcon>
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-teacher>
+      <tr class="p-selectable-row">
+        <td>
+          <p-checkbox
+            (onChange)="selectTeacher()"
+            [(ngModel)]="selectedTeacher"
+            name="group"
+            [value]="teacher"
+          ></p-checkbox>
+        </td>
+        <td>
+          <span class="p-column-title">Name</span>
+          {{ teacher.name }}
+        </td>
+        <td>
+          <span class="p-column-title">Country</span>
+          <span class="image-text">{{ teacher.country.name }}</span>
+        </td>
+
+        <td>
+          <span class="p-column-title">Date</span>
+          {{ teacher.date | date: "MM/dd/yyyy" }}
+        </td>
+
+        <td>
+          <span class="p-column-title">Status</span>
+          <span [class]="'teacher-badge status-' + teacher.status">{{
+            teacher.status
+          }}</span>
+        </td>
+        <td>
+          <span class="p-column-title">Activity</span>
+          <p-progressBar
+            [value]="teacher.activity"
+            [showValue]="false"
+          ></p-progressBar>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

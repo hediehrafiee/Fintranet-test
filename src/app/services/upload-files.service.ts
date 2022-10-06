@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { map, Observable } from 'rxjs';
-import { UploadFileRs } from '../interfaces/apis/upload-file.interface';
+import { UploadFileRs } from '../interfaces/upload-file.interface';
 
 @Injectable({
   providedIn: 'root',

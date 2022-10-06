@@ -14,7 +14,6 @@ import { UploadFilesService } from './../../services/upload-files.service';
   selector: 'app-upload-image',
   templateUrl: './upload-image.component.html',
   styleUrls: ['./upload-image.component.scss'],
-  providers: [MessageService],
 })
 export class UploadImageComponent {
   public inProgress: boolean = false;
@@ -68,22 +67,26 @@ export class UploadImageComponent {
               break;
             case HttpEventType.Response:
               this.inProgress = false;
-
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Success',
+                detail: 'Image uploaded successfully',
+              });
               return event;
           }
         }),
         catchError((error: HttpErrorResponse) => {
           this.inProgress = false;
+          this.messageService.add({
+            severity: 'err',
+            summary: 'Error',
+            detail: 'Upload failed',
+          });
           return of(`Upload failed.`);
         })
       )
       .subscribe((event) => {
         if (event) {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: 'Image uploaded successfully',
-          });
         }
       });
   }
