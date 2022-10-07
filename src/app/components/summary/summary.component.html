@@ -5,7 +5,7 @@
       <div>
         <img
           class="width-xsm height-xsm"
-          [src]="summaryOfSteps.image.src"
+          [src]="summaryOfSteps.image.src || 'assets/images/default-image.jpg'"
           [alt]="summaryOfSteps.image.name"
         />
       </div>
