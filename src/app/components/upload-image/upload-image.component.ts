@@ -1,13 +1,10 @@
-import {
-  HttpEventType,
-  HttpErrorResponse,
-  HttpResponseBase,
-} from '@angular/common/http';
+import { HttpEventType, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { map, catchError, of } from 'rxjs';
 
 import { MessageService } from 'primeng/api';
 
-import { map, catchError, of } from 'rxjs';
+import { StepsService } from '../../services/steps.service';
 import { UploadFilesService } from './../../services/upload-files.service';
 
 @Component({
@@ -26,11 +23,17 @@ export class UploadImageComponent {
 
   constructor(
     private readonly uploadFilesService: UploadFilesService,
-    private readonly messageService: MessageService
+    private readonly messageService: MessageService,
+
+    private stepsService: StepsService
   ) {}
 
   public preview(event: Event): void {
     this.file = ((event.target as HTMLInputElement).files as FileList)[0];
+
+    this.stepsService.summaryData.image = {
+      name: this.file.name,
+    };
 
     let fileSize: number = this.file.size;
     if (fileSize > this.maxImageSize) {
@@ -39,6 +42,8 @@ export class UploadImageComponent {
 
         detail: 'Max image size is 5MB',
       });
+      this.stepsService.summaryData.image.status = 'WARN';
+      this.stepsService.setSummaryData(this.stepsService.summaryData);
       this.file = null;
       return;
     }
@@ -47,6 +52,11 @@ export class UploadImageComponent {
     reader.readAsDataURL(this.file);
     reader.onload = () => {
       this.imgSrc = reader.result as string;
+
+      if (this.stepsService.summaryData.image)
+        this.stepsService.summaryData.image.src = this.imgSrc;
+
+      this.stepsService.setSummaryData(this.stepsService.summaryData);
     };
   }
 
@@ -72,6 +82,11 @@ export class UploadImageComponent {
                 summary: 'Success',
                 detail: 'Image uploaded successfully',
               });
+
+              if (this.stepsService.summaryData.image)
+                this.stepsService.summaryData.image.status = 'SUCCESS';
+              this.stepsService.setSummaryData(this.stepsService.summaryData);
+
               return event;
           }
         }),
@@ -82,6 +97,11 @@ export class UploadImageComponent {
             summary: 'Error',
             detail: 'Upload failed',
           });
+
+          if (this.stepsService.summaryData.image)
+            this.stepsService.summaryData.image.status = 'FAILED';
+          this.stepsService.setSummaryData(this.stepsService.summaryData);
+
           return of(`Upload failed.`);
         })
       )

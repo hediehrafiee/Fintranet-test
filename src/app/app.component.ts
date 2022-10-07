@@ -13,29 +13,23 @@ import { TeacherRs } from './interfaces/teachers.interface';
 export class AppComponent {
   title = 'test-fintranet';
 
-  public items: any;
+  public items: { label: string }[] = [
+    {
+      label: 'Upload Image',
+    },
+    {
+      label: 'Form',
+    },
+    {
+      label: 'Payment',
+    },
+    {
+      label: 'Confirmation',
+    },
+  ];
 
-  public activeIndex: number = 2;
+  public activeIndex: number = 0;
   public stepsComponentEnum: typeof StepsComponentEnum = StepsComponentEnum;
-
-  constructor() {}
-
-  ngOnInit() {
-    this.items = [
-      {
-        label: 'Upload Image',
-      },
-      {
-        label: 'Form',
-      },
-      {
-        label: 'Payment',
-      },
-      {
-        label: 'Confirmation',
-      },
-    ];
-  }
 
   public changeStep(index: number): void {
     this.activeIndex = index;

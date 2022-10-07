@@ -13,9 +13,6 @@ export class FormErrorPipe implements PipeTransform {
     if (keys.length === 0) return '';
 
     const key: string = keys[0];
-    const value: any = (errors as ValidationErrors)[key];
-
-    console.log(key, value);
     switch (key) {
       case 'required':
         return 'This field is required';

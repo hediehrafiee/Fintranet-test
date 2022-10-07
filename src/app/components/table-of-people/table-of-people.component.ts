@@ -1,7 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { MessageService } from 'primeng/api';
+
 import { TeachersService } from '../../services/teachers.service';
+import { StepsService } from '../../services/steps.service';
 
 import { TeacherRs } from '../../interfaces/teachers.interface';
 
@@ -20,12 +22,13 @@ export class TableOfPeopleComponent implements OnInit {
 
   constructor(
     private readonly teachersService: TeachersService,
-    private readonly messageService: MessageService
+    private readonly messageService: MessageService,
+
+    private stepsService: StepsService
   ) {}
 
   ngOnInit(): void {
     this.teachersService.getTeachers().subscribe((teachers) => {
-      console.log(teachers);
       this.teachers = teachers;
       this.loading = false;
 
@@ -35,7 +38,7 @@ export class TableOfPeopleComponent implements OnInit {
     });
   }
 
-  selectTeacher(): void {
+  public selectTeacher(): void {
     const chooses: TeacherRs =
       this.selectedTeacher[this.selectedTeacher.length - 1];
     this.selectedTeacher.length = 0;
@@ -46,6 +49,10 @@ export class TableOfPeopleComponent implements OnInit {
       summary: 'Success',
       detail: `${chooses.name} has been selected`,
     });
+
+    this.stepsService.summaryData.teacher = chooses;
+    this.stepsService.setSummaryData(this.stepsService.summaryData);
+
     setTimeout(() => {
       this.onChooseTeacher.emit(this.selectedTeacher);
     }, 2000);

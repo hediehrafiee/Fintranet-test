@@ -24,14 +24,17 @@ import { DividerModule } from 'primeng/divider';
 import { FormErrorPipe } from './pipes.ts/form-error.pipe';
 import { TableModule } from 'primeng/table';
 import { CheckboxModule } from 'primeng/checkbox';
+import { SummaryComponent } from './components/summary/summary.component';
 
 @NgModule({
   declarations: [
+    FormErrorPipe,
+
     AppComponent,
     UploadImageComponent,
     FormComponent,
-    FormErrorPipe,
     TableOfPeopleComponent,
+    SummaryComponent,
   ],
   imports: [
     HttpClientModule,

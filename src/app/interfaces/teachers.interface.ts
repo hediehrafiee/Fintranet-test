@@ -8,8 +8,4 @@ export interface TeacherRs {
   company?: string;
   date?: string;
   status?: string;
-  representative?: {
-    name?: string;
-    image?: string;
-  };
 }

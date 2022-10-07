@@ -19,7 +19,8 @@
       <app-table-of-people
         *ngSwitchCase="stepsComponentEnum.TableOfPeople"
         (onChooseTeacher)="onChooseTeacher($event)"
-      ></app-table-of-people>
+      ></app-table-of-people
+      ><app-summary *ngSwitchCase="stepsComponentEnum.Summary"></app-summary>
     </ng-container>
 
     <router-outlet></router-outlet>

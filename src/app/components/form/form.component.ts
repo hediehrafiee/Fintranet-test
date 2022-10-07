@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 
 import { MessageService } from 'primeng/api';
+import { StepsService } from '../../services/steps.service';
 
 import { DateRangeValidator } from '../../validators/date.validator';
 import { LettersValidator } from '../../validators/letters.validator';
@@ -26,7 +27,8 @@ export class FormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private readonly messageService: MessageService
+    private readonly messageService: MessageService,
+    private stepsService: StepsService
   ) {}
 
   public addInformationForm: FormGroup = this.formBuilder.group({
@@ -65,7 +67,9 @@ export class FormComponent implements OnInit {
   }
 
   public addInformation(): void {
-    console.log(this.addInformationForm.value);
+    this.stepsService.summaryData.information = this.addInformationForm.value;
+    this.stepsService.setSummaryData(this.stepsService.summaryData);
+
     this.messageService.add({
       severity: 'success',
       summary: 'Success',
